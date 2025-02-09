@@ -33,8 +33,8 @@ npm install
 
 # Start the server
 node server.js
-
+```
 ## 📸 Screenshot
 Here’s a preview of the URL Shortener:
-```
+
 ![UI screenshot](https://github.com/user-attachments/assets/91198cd7-1bf6-4446-b3d1-09ed40bbfabc) 
