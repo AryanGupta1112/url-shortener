@@ -6,7 +6,7 @@ async function shortenUrl() {
     const resultDiv = document.getElementById("result");
     const errorMessage = document.getElementById("errorMessage");
 
-    // Reset UI
+    // Reset Ui
     resultDiv.classList.add("hidden");
     errorMessage.classList.add("hidden");
 
