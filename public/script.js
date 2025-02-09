@@ -1,7 +1,8 @@
-const API_BASE = "http://localhost:5000/api"; // Change when deploying
+const API_BASE = "https://url-shortener-xfee.onrender.com/api"; // Change when deploying
 
 async function shortenUrl() {
     const longUrl = document.getElementById("longUrl").value.trim();
+    const expiresIn = document.getElementById("expiresIn").value.trim();
     const resultDiv = document.getElementById("result");
     const errorMessage = document.getElementById("errorMessage");
 
@@ -18,7 +19,7 @@ async function shortenUrl() {
         const response = await fetch(`${API_BASE}/shorten`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ originalUrl: longUrl })
+            body: JSON.stringify({ originalUrl: longUrl, expiresIn: expiresIn || null })
         });
 
         const data = await response.json();
