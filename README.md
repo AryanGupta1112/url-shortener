@@ -23,7 +23,7 @@ A web-based **URL Shortener** that allows users to generate **short links** with
 ## 🚀 How to Run Locally
 ```sh
 # Clone the repository
-git clone https://github.com/YOUR_GITHUB_USERNAME/url-shortener.git
+git clone https://github.com/AryanGupta1112/url-shortener.git
 
 # Navigate to the folder
 cd url-shortener
