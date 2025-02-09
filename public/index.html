@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered URL Shortener</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white flex justify-center items-center min-h-screen">
+    <div class="bg-gray-800 shadow-lg p-8 rounded-lg text-center w-full max-w-lg">
+        <!-- Title Section -->
+        <h1 class="text-3xl font-bold text-blue-400">🔗 AI-Powered URL Shortener</h1>
+        <p class="text-gray-300 mt-2">Shorten, track, and manage your links easily.</p>
+
+        <!-- Input Section -->
+        <div class="mt-6">
+            <input type="text" id="longUrl" class="w-full p-3 border rounded bg-gray-700 text-white" placeholder="Enter your long URL">
+            
+            <label for="expiresIn" class="block mt-3 text-gray-400">Set Expiry (Days):</label>
+            <input type="number" id="expiresIn" class="w-full p-2 border rounded bg-gray-700 text-white" placeholder="Optional (e.g., 7 for 7 days)">
+        
+            <button onclick="shortenUrl()" class="w-full bg-blue-600 text-white p-3 mt-3 rounded hover:bg-blue-700 transition-all">
+                🚀 Shorten URL
+            </button>
+        </div>
+
+        <!-- Shortened URL Display -->
+        <div id="result" class="hidden mt-6 p-4 bg-green-900 rounded">
+            <p class="text-green-300 font-semibold">Your Shortened URL:</p>
+            <input type="text" id="shortUrl" class="w-full p-2 mt-2 border rounded bg-gray-700 text-white" readonly>
+            <button onclick="copyUrl()" class="bg-green-600 text-white p-2 mt-2 rounded hover:bg-green-700 transition-all w-full">📋 Copy</button>
+        </div>
+
+        <!-- Error Message -->
+        <div id="errorMessage" class="hidden mt-3 p-4 bg-red-900 text-red-300 rounded"></div>
+
+        <!-- Analytics Section -->
+        <div id="analyticsResult" class="hidden mt-6 p-4 bg-blue-900 rounded">
+            <h2 class="font-semibold text-blue-300">📊 Click Analytics</h2>
+            <p><strong>Original URL:</strong> <span id="originalUrl"></span></p>
+            <p><strong>Clicks:</strong> <span id="clickCount"></span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
