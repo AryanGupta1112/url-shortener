@@ -37,4 +37,4 @@ node server.js
 ## 📸 Screenshot
 Here’s a preview of the URL Shortener:
 
-![URL Shortener Screenshot](https://github.com/user-attachments/assets/03dc7999-a8d5-45c9-b3df-be436094228f)  
+![image](https://github.com/user-attachments/assets/03dc7999-a8d5-45c9-b3df-be436094228f)  
