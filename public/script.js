@@ -22,10 +22,7 @@ async function shortenUrl() {
       "x-api-key": "3ec2b6975d147d081810dbe2ee1aede6c329f7bf59e7dd775f62c8ef88e08355", },
             body: JSON.stringify({ originalUrl: longUrl, expiresIn: expiresIn || null })
         });
-        if (!response.ok) {
-            throw new Error(`Error: ${response.statusText}`);
-          }
-
+      
         const data = await response.json();
 
         if (data.shortUrl) {
@@ -57,6 +54,7 @@ async function fetchAnalytics(shortUrl) {
           }
         
         const data = await response.json();
+        
 
         if (data.originalUrl) {
             document.getElementById("originalUrl").innerText = data.originalUrl;
