@@ -31,7 +31,7 @@ router.post("/shorten", async (req, res) => {
     res.status(201).json({
       message: "✅ URL shortened successfully!",
       originalUrl,
-      shortUrl: `${baseUrl}/${newUrl.shortUrl}`,
+      shortUrl: `${baseUrl}/${shortUrl}`, 
       expiresAt: newUrl.expiresAt || "No expiration set",
 
     });
