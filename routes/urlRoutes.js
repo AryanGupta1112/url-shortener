@@ -79,10 +79,10 @@ router.get("/analytics/:shortUrl", async (req, res) => {
     res.json({
       message: "📊 URL Analytics",
       originalUrl: url.originalUrl,
-      shortUrl: url.shortUrl,
+      shortUrl: `${process.env.BASE_URL || "https://url-shortener-xfee.onrender.com"}/${url.shortUrl}`,
       clicks: url.clicks,
       createdAt: url.createdAt,
-      expiresAt: url.expiresAt || "No expiration set",
+      expiresAt: url.expiresAt ? url.expiresAt.toISOString() : "No expiration set",
     });
   } catch (error) {
     console.error("❌ Error in analytics:", error);
