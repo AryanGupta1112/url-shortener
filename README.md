@@ -5,8 +5,10 @@ A web-based **URL Shortener** that allows users to generate **short links** with
 ✅ Shorten long URLs  
 ✅ Set **expiration dates** for short links  
 ✅ Track **click analytics**
+
 ✅ Simple **dark mode UI**  
 ✅ **MongoDB Atlas** for database storage
+
 ✅ **API Key Authentication** for secure access 🔑  
 
 ## 📜 How to Use
