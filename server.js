@@ -25,7 +25,7 @@ app.use(
 // Rate Limiting: Max 5 requests per minute
 const limiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
-  max: process.env.NODE_ENV === "production" ? 50 : 100,
+  max: 50,
   message: { error: "❌ Too many requests. Please try again later." },
 });
 app.use("/api/", limiter); // Protect API routes
