@@ -32,7 +32,8 @@ router.post("/shorten", async (req, res) => {
       message: "✅ URL shortened successfully!",
       originalUrl,
       shortUrl: `${baseUrl}/${newUrl.shortUrl}`,
-      expiresAt: expiresAt ? expiresAt.toISOString() : "No expiration set",
+      expiresAt: newUrl.expiresAt || "No expiration set",
+
     });
   } catch (error) {
     console.error("❌ Error in /shorten:", error);
