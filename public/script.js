@@ -49,9 +49,7 @@ async function fetchAnalytics(shortUrl) {
               "x-api-key": "3ec2b6975d147d081810dbe2ee1aede6c329f7bf59e7dd775f62c8ef88e08355", // Add your actual API key
             },
           });
-          if (!response.ok) {
-            throw new Error(`Error: ${response.statusText}`);
-          }
+          
         
         const data = await response.json();
         
