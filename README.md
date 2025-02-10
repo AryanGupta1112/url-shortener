@@ -2,12 +2,12 @@
 A web-based **URL Shortener** that allows users to generate **short links** with **click tracking** and **expiration dates**.
 
 ## 🚀 Features
-✅ Shorten long URLs  
-✅ Set **expiration dates** for short links  
-✅ Track **click analytics**
-✅ Simple **dark mode UI**  
-✅ **MongoDB Atlas** for database storage
-✅ **API Key Authentication** for secure access 🔑  
+- ✅ Shorten long URLs  
+- ✅ Set **expiration dates** for short links ⏳  
+- ✅ Track **click analytics** 📊  
+- ✅ Simple **dark mode UI** 🎨  
+- ✅ MongoDB Atlas for database storage 🛠  
+- ✅ API Key Authentication for secure access 🔑  
 
 ## 📜 How to Use
 1. Enter a long URL.  
@@ -53,15 +53,15 @@ curl -X GET "https://yourapp.onrender.com/api/analytics/abc123" \
 ```
 
 ## 🔐 Security Enhancements
-API Key Authentication: Prevents unauthorized API access.
-CORS Protection: Allows only requests from the frontend.
-Rate Limiting: Limits requests to 5 per minute to prevent abuse.
+- API Key Authentication: Prevents unauthorized API access.
+- CORS Protection: Allows only requests from the frontend.
+- Rate Limiting: Limits requests to 5 per minute to prevent abuse.
 
 ## 🔧 Tech Stack
-Frontend: HTML, CSS (TailwindCSS), JavaScript
-Backend: Node.js, Express.js
-Database: MongoDB Atlas
-Hosting: Render (backend) & Vercel (frontend)
+- Frontend: HTML, CSS (TailwindCSS), JavaScript
+- Backend: Node.js, Express.js
+- Database: MongoDB Atlas
+- Hosting: Render (backend) & Vercel (frontend)
 
 ## 🚀 How to Run Locally
 ```sh
@@ -83,8 +83,8 @@ node server.js
 ```
 
 ## 📡 Deployment
-Frontend: Live on Vercel
-Backend API: Live on Render
+- Frontend: Live on Vercel
+- Backend API: Live on Render
 
 ## 🤝 Contributing
 Feel free to contribute! Fork the repo, create a branch, and submit a PR.
