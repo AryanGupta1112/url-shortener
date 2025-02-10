@@ -27,13 +27,11 @@ router.post("/shorten", async (req, res) => {
 
     const baseUrl = process.env.BASE_URL || "https://url-shortener-xfee.onrender.com";
 
-
     res.status(201).json({
       message: "✅ URL shortened successfully!",
       originalUrl,
       shortUrl: `${baseUrl}/${newUrl.shortUrl}`,
-      expiresAt: newUrl.expiresAt || "No expiration set",
-
+      expiresAt: newUrl.expiresAt ? newUrl.expiresAt.toISOString() : "No expiration set",
     });
   } catch (error) {
     console.error("❌ Error in /shorten:", error);
@@ -82,7 +80,7 @@ router.get("/analytics/:shortUrl", async (req, res) => {
       shortUrl: url.shortUrl,
       clicks: url.clicks,
       createdAt: url.createdAt,
-      expiresAt: url.expiresAt || "No expiration set",
+      expiresAt: url.expiresAt ? url.expiresAt.toISOString() : "No expiration set",
     });
   } catch (error) {
     console.error("❌ Error in analytics:", error);
