@@ -15,7 +15,8 @@ A web-based **URL Shortener** that allows users to generate **short links** with
 4. Copy and share your short URL!  
 
 ## 📜 How to Use the API (Requires API Key 🔐)
-The API now requires an **API Key** for all requests. Here’s how to use it:
+The API now requires an **API Key** for all requests.
+To use the API, **request an API key and the API** by contacting the developer. Here’s how to use it:
 
 ### **1️⃣ Shorten a URL**
 ```sh
@@ -64,7 +65,7 @@ Hosting: Render (backend) & Vercel (frontend)
 ## 🚀 How to Run Locally
 ```sh
 # Clone the repository
-git clone https://github.com/YOUR_GITHUB_USERNAME/url-shortener.git
+git clone https://github.com/AryanGupta1112/url-shortener.git
 
 # Navigate to the folder
 cd url-shortener
