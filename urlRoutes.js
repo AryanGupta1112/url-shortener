@@ -24,14 +24,14 @@ router.post("/shorten", async (req, res) => {
 
     const newUrl = new Url({ originalUrl, shortUrl, expiresAt });
     await newUrl.save();
-    
+
     const baseUrl = process.env.BASE_URL || "https://url-shortener-xfee.onrender.com";
 
 
     res.status(201).json({
       message: "✅ URL shortened successfully!",
       originalUrl,
-      shortUrl: newUrl.shortUrl,
+      shortUrl: `${baseUrl}/${newUrl.shortUrl}`,
       expiresAt: expiresAt ? expiresAt.toISOString() : "No expiration set",
     });
   } catch (error) {

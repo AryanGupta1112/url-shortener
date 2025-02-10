@@ -8,7 +8,7 @@ const rateLimit = require("express-rate-limit");
 const app = express();
 app.use(express.json());
 
-//CORS: Allow only requests from frontend
+// ✅ CORS: Allow only requests from frontend
 const allowedOrigins = ["https://url-shortener-nine-phi.vercel.app"];
 app.use(
   cors({
@@ -25,7 +25,7 @@ app.use(
   })
 );
 
-// Rate Limiting: Max 5 requests per minute
+// ✅ Rate Limiting: Max 100 requests per minute
 const limiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
   max: 100,
@@ -33,23 +33,23 @@ const limiter = rateLimit({
 });
 app.use("/api/", limiter); // Protect API routes
 
-// Serve Static Files from `public/`
+// ✅ Serve Static Files from `public/`
 app.use(express.static(path.join(__dirname, "public")));
 
-// Check if MongoDB URI is set
+// ✅ Check if MongoDB URI is set
 const mongoUri = process.env.MONGO_URI;
 if (!mongoUri) {
   console.error("❌ MongoDB connection string is missing! Add it in .env file.");
   process.exit(1);
 }
 
-// Connect to MongoDB
+// ✅ Connect to MongoDB
 mongoose
   .connect(mongoUri)
   .then(() => console.log("✅ Connected to MongoDB Atlas"))
   .catch((err) => console.error("❌ MongoDB Atlas connection error:", err));
 
-// API Key Middleware (Extra Security)
+// ✅ API Key Middleware (Extra Security)
 const checkApiKey = (req, res, next) => {
   const apiKey = req.headers["x-api-key"];
   if (apiKey && apiKey === process.env.API_KEY) {
@@ -60,7 +60,7 @@ const checkApiKey = (req, res, next) => {
 };
 app.use("/api/", checkApiKey); // Apply API key security
 
-// Import and Use API Routes
+// ✅ Import and Use API Routes
 const urlRoutes = require("./routes/urlRoutes");
 
 if (urlRoutes && Object.keys(urlRoutes).length > 0) {
@@ -69,27 +69,51 @@ if (urlRoutes && Object.keys(urlRoutes).length > 0) {
   console.error("❌ Error: urlRoutes is empty or not a valid Express middleware function.");
 }
 
-// Serve the Main Frontend File (index.html)
+// ✅ Redirect Short URLs Without /api Prefix
+app.get("/:shortUrl", async (req, res) => {
+  try {
+    const Url = require("./models/Url");
+    const url = await Url.findOne({ shortUrl: req.params.shortUrl });
+
+    if (!url) {
+      return res.status(404).json({ error: "❌ URL not found" });
+    }
+
+    if (url.expiresAt && new Date() > url.expiresAt) {
+      return res.status(410).json({ error: "❌ This short URL has expired" });
+    }
+
+    url.clicks++; // Increment click count
+    await url.save();
+
+    res.redirect(url.originalUrl);
+  } catch (error) {
+    console.error("❌ Error in redirecting:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// ✅ Serve the Main Frontend File (index.html)
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-//  Handle 404 Errors (for API routes)
+// ✅ Handle 404 Errors (for API routes)
 app.use("/api", (req, res) => {
   res.status(404).json({ error: "API route not found" });
 });
 
-//  Handle 404 Errors (for frontend)
+// ✅ Handle 404 Errors (for frontend)
 app.use((req, res) => {
   res.status(404).json({ error: "❌ Route not found" });
 });
 
-// Handle Server Errors
+// ✅ Handle Server Errors
 app.use((err, req, res, next) => {
   console.error("❌ Server Error:", err);
   res.status(500).json({ error: "Internal Server Error" });
 });
 
-// Start the Server
+// ✅ Start the Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
