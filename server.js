@@ -19,13 +19,16 @@ app.use(
         callback(new Error("❌ Not allowed by CORS"));
       }
     },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allow specific HTTP methods
+    allowedHeaders: ["Content-Type", "x-api-key"], // Allow specific headers
+    credentials: true, // Allow credentials if needed
   })
 );
 
 // Rate Limiting: Max 5 requests per minute
 const limiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
-  max: 50,
+  max: 100,
   message: { error: "❌ Too many requests. Please try again later." },
 });
 app.use("/api/", limiter); // Protect API routes
