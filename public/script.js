@@ -22,6 +22,9 @@ async function shortenUrl() {
       "x-api-key": "3ec2b6975d147d081810dbe2ee1aede6c329f7bf59e7dd775f62c8ef88e08355", },
             body: JSON.stringify({ originalUrl: longUrl, expiresIn: expiresIn || null })
         });
+        if (!response.ok) {
+            throw new Error(`Error: ${response.statusText}`);
+          }
 
         const data = await response.json();
 
@@ -42,7 +45,17 @@ async function shortenUrl() {
 
 async function fetchAnalytics(shortUrl) {
     try {
-        const response = await fetch(`${API_BASE}/analytics/${shortUrl}`);
+        const response = await fetch(`${API_BASE}/analytics/${shortUrl}`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "x-api-key": "your-secret-api-key-here", // Add your actual API key
+            },
+          });
+          if (!response.ok) {
+            throw new Error(`Error: ${response.statusText}`);
+          }
+        
         const data = await response.json();
 
         if (data.originalUrl) {
@@ -54,6 +67,17 @@ async function fetchAnalytics(shortUrl) {
         console.error("Error fetching analytics:", error);
     }
 }
+(async () => {
+    try {
+      const shortUrlData = await shortenUrl("https://google.com");
+      console.log("Shortened URL:", shortUrlData.shortUrl);
+  
+      const analyticsData = await getAnalytics(shortUrlData.shortUrl);
+      console.log("Analytics:", analyticsData);
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  })();
 
 function copyUrl() {
     const shortUrlInput = document.getElementById("shortUrl");
