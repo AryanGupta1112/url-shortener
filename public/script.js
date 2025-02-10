@@ -49,7 +49,7 @@ async function fetchAnalytics(shortUrl) {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              "x-api-key": "your-secret-api-key-here", // Add your actual API key
+              "x-api-key": "3ec2b6975d147d081810dbe2ee1aede6c329f7bf59e7dd775f62c8ef88e08355", // Add your actual API key
             },
           });
           if (!response.ok) {
