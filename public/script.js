@@ -63,17 +63,7 @@ async function fetchAnalytics(shortUrl) {
         console.error("Error fetching analytics:", error);
     }
 }
-(async () => {
-    try {
-      const shortUrlData = await shortenUrl("https://google.com");
-      console.log("Shortened URL:", shortUrlData.shortUrl);
-  
-      const analyticsData = await getAnalytics(shortUrlData.shortUrl);
-      console.log("Analytics:", analyticsData);
-    } catch (error) {
-      console.error("Error:", error.message);
-    }
-  })();
+
 
 function copyUrl() {
     const shortUrlInput = document.getElementById("shortUrl");
