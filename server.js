@@ -17,7 +17,7 @@ if (!API_KEY) {
 
 // ✅ Allow Only Specific Frontend Domains
 const allowedOrigins = [
-  "https://url-shortener-nine-phi.vercel.app", 
+  "https://url-shortener-nine-phi.vercel.app",
   "https://your-other-frontend.com" // Add more if needed
 ];
 
@@ -31,7 +31,7 @@ app.use(
         callback(new Error("❌ Not allowed by CORS"));
       }
     },
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed HTTP methods
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type"], // Remove x-api-key (handled internally)
     credentials: true, // Allow cookies if needed
   })
@@ -69,16 +69,37 @@ app.use("/api/", (req, res, next) => {
 
 // ✅ Import and Use API Routes
 const urlRoutes = require("./routes/urlRoutes");
-
 if (urlRoutes && Object.keys(urlRoutes).length > 0) {
   app.use("/api", urlRoutes);
 } else {
   console.error("❌ Error: urlRoutes is empty or not a valid Express middleware function.");
 }
 
-// ✅ Serve Frontend (index.html)
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+// ✅ Redirect Handler for Shortened URLs
+const Url = require("./models/Url");
+app.get("/:shortUrl", async (req, res) => {
+  try {
+    const url = await Url.findOne({ shortUrl: req.params.shortUrl });
+
+    if (!url) {
+      return res.status(404).json({ error: "❌ URL not found" });
+    }
+
+    // ✅ Check if link has expired
+    if (url.expiresAt && new Date() > url.expiresAt) {
+      await Url.deleteOne({ shortUrl: req.params.shortUrl });
+      return res.status(410).json({ error: "❌ This short URL has expired and has been deleted." });
+    }
+
+    url.clicks++; // Increase click count
+    await url.save();
+
+    console.log(`🔄 Redirecting to: ${url.originalUrl}`); // Debugging Log
+    res.redirect(url.originalUrl);
+  } catch (error) {
+    console.error("❌ Error in redirecting:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 // ✅ Handle 404 Errors (API Routes)
