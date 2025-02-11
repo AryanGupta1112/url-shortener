@@ -76,7 +76,7 @@ router.post("/shorten", async (req, res) => {
     res.status(201).json({
       message: "✅ URL shortened successfully!",
       originalUrl,
-      shortUrl: `${baseUrl}/${shortUrl}`,
+      shortUrl: shortUrl,
       category, // Now using TF-IDF for categorization
       expiresAt: expiresAt ? expiresAt.toISOString() : "No expiration set",
     });

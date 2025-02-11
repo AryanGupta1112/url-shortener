@@ -28,7 +28,8 @@ async function shortenUrl() {
         const data = await response.json();
 
         if (data.shortUrl) {
-            const shortUrl = `${API_BASE.replace("/api", "")}/${data.shortUrl}`;
+            const shortCode = data.shortUrl.replace(API_BASE + "/", "");
+            const shortUrl = `${API_BASE.replace("/api", "")}/${shortCode}`;
             document.getElementById("shortUrl").value = shortUrl;
             resultDiv.classList.remove("hidden");
 
@@ -45,8 +46,7 @@ async function shortenUrl() {
 async function fetchAnalytics(shortUrl) {
     try {
         // Extract short code from full URL
-        const shortCode = shortUrl.replace(API_BASE.replace("/api", ""), "").replace("/", "");
-
+        const shortCode = shortUrl.split("/").pop();
         const response = await fetch(`${API_BASE}/analytics/${shortCode}`, {
             method: "GET",
             headers: { "Content-Type": "application/json" },
