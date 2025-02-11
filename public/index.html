@@ -29,24 +29,23 @@
             <p class="text-green-300 font-semibold">✅ Your Shortened URL:</p>
             <input type="text" id="shortUrl" class="w-full p-2 mt-2 border rounded bg-gray-700 text-white" readonly>
             <button onclick="copyUrl()" class="bg-green-600 text-white p-2 mt-2 rounded hover:bg-green-700 transition-all w-full">📋 Copy</button>
+            <p><strong>Category:</strong> <span id="urlCategory">-</span></p>
+
             <p id="copyMessage" class="text-green-300 text-sm mt-2 hidden">✅ Copied to clipboard!</p>
         </div>
 
-        <!-- AI-Powered Category Display -->
-        <div id="categoryResult" class="hidden mt-6 p-4 bg-yellow-900 rounded">
-            <h2 class="font-semibold text-yellow-300">📂 AI-Powered Category</h2>
-            <p><strong>Category:</strong> <span id="urlCategory"></span></p>
-        </div>
+       
 
         <!-- Error Message -->
         <div id="errorMessage" class="hidden mt-3 p-4 bg-red-900 text-red-300 rounded"></div>
 
         <!-- Analytics Section -->
-        <div id="analyticsResult" class="result hidden">
-            <h3>📊 URL Analytics</h3>
-            <p><strong>Original URL:</strong> <span id="originalUrl">-</span></p>
-            <p><strong>Clicks:</strong> <span id="clickCount">0</span></p>
+        <div id="analyticsResult" class="hidden mt-6 p-4 bg-blue-900 rounded">
+            <h2 class="font-semibold text-blue-300">📊 Click Analytics</h2>
+            <p><strong>Original URL:</strong> <span id="originalUrl"></span></p>
+            <p><strong>Clicks:</strong> <span id="clickCount"></span></p>
             <p><strong>Category:</strong> <span id="analyticsCategory">-</span></p>
+
         </div>
     </div>
 
