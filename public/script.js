@@ -1,7 +1,7 @@
-// ✅ Load API Base URL and API Key from Environment Variables
-const API_BASE = "https://url-shortener-xfee.onrender.com/api"; // Change when deploying
-const API_KEY = cf9ce0b391d41a906759806ed1958ab2b670c91fb6afbd5d9e6d5b8de399ec6d; // Load API key securely
-console.log("🔑 API Key Loaded:", API_KEY);
+// ✅ API Base URL (Backend will handle security)
+const API_BASE = "https://url-shortener-xfee.onrender.com/api";
+
+console.log("🔑 API Key Removed from Frontend for Security");
 
 async function shortenUrl() {
     const longUrl = document.getElementById("longUrl").value.trim();
@@ -21,17 +21,14 @@ async function shortenUrl() {
     try {
         const response = await fetch(`${API_BASE}/shorten`, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "x-api-key": API_KEY, // ✅ Use environment variable for API key
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ originalUrl: longUrl, expiresIn: expiresIn || null })
         });
 
         const data = await response.json();
 
         if (data.shortUrl) {
-            const shortUrl = `${API_BASE}/${data.shortUrl}`;
+            const shortUrl = `${API_BASE.replace("/api", "")}/${data.shortUrl}`;
             document.getElementById("shortUrl").value = shortUrl;
             resultDiv.classList.remove("hidden");
 
@@ -49,10 +46,7 @@ async function fetchAnalytics(shortUrl) {
     try {
         const response = await fetch(`${API_BASE}/analytics/${shortUrl}`, {
             method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "x-api-key": API_KEY, // ✅ Use environment variable for API key
-            },
+            headers: { "Content-Type": "application/json" },
         });
 
         const data = await response.json();
