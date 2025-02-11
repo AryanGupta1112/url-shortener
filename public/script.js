@@ -1,6 +1,6 @@
 // ✅ Load API Base URL and API Key from Environment Variables
 const API_BASE = "https://url-shortener-xfee.onrender.com/api"; // Change when deploying
-const API_KEY = process.env.API_KEY; // Load API key securely
+const API_KEY = cf9ce0b391d41a906759806ed1958ab2b670c91fb6afbd5d9e6d5b8de399ec6d; // Load API key securely
 console.log("🔑 API Key Loaded:", API_KEY);
 
 async function shortenUrl() {
