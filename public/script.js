@@ -44,7 +44,10 @@ async function shortenUrl() {
 
 async function fetchAnalytics(shortUrl) {
     try {
-        const response = await fetch(`${API_BASE}/analytics/${shortUrl}`, {
+        // Extract short code from full URL
+        const shortCode = shortUrl.replace(API_BASE.replace("/api", ""), "").replace("/", "");
+
+        const response = await fetch(`${API_BASE}/analytics/${shortCode}`, {
             method: "GET",
             headers: { "Content-Type": "application/json" },
         });
@@ -57,7 +60,7 @@ async function fetchAnalytics(shortUrl) {
             document.getElementById("analyticsResult").classList.remove("hidden");
         }
     } catch (error) {
-        console.error("Error fetching analytics:", error);
+        console.error("❌ Error fetching analytics:", error);
     }
 }
 
