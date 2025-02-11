@@ -1,4 +1,6 @@
+// ✅ Load API Base URL and API Key from Environment Variables
 const API_BASE = "https://url-shortener-xfee.onrender.com/api"; // Change when deploying
+const API_KEY = process.env.API_KEY; // Load API key securely
 
 async function shortenUrl() {
     const longUrl = document.getElementById("longUrl").value.trim();
@@ -6,7 +8,7 @@ async function shortenUrl() {
     const resultDiv = document.getElementById("result");
     const errorMessage = document.getElementById("errorMessage");
 
-    // Reset Ui
+    // Reset UI
     resultDiv.classList.add("hidden");
     errorMessage.classList.add("hidden");
 
@@ -18,11 +20,13 @@ async function shortenUrl() {
     try {
         const response = await fetch(`${API_BASE}/shorten`, {
             method: "POST",
-            headers: { "Content-Type": "application/json",
-      "x-api-key": "3ec2b6975d147d081810dbe2ee1aede6c329f7bf59e7dd775f62c8ef88e08355", },
+            headers: {
+                "Content-Type": "application/json",
+                "x-api-key": API_KEY, // ✅ Use environment variable for API key
+            },
             body: JSON.stringify({ originalUrl: longUrl, expiresIn: expiresIn || null })
         });
-      
+
         const data = await response.json();
 
         if (data.shortUrl) {
@@ -45,14 +49,12 @@ async function fetchAnalytics(shortUrl) {
         const response = await fetch(`${API_BASE}/analytics/${shortUrl}`, {
             method: "GET",
             headers: {
-              "Content-Type": "application/json",
-              "x-api-key": "3ec2b6975d147d081810dbe2ee1aede6c329f7bf59e7dd775f62c8ef88e08355", // Add your actual API key
+                "Content-Type": "application/json",
+                "x-api-key": API_KEY, // ✅ Use environment variable for API key
             },
-          });
-          
-        
+        });
+
         const data = await response.json();
-        
 
         if (data.originalUrl) {
             document.getElementById("originalUrl").innerText = data.originalUrl;
@@ -63,7 +65,6 @@ async function fetchAnalytics(shortUrl) {
         console.error("Error fetching analytics:", error);
     }
 }
-
 
 function copyUrl() {
     const shortUrlInput = document.getElementById("shortUrl");

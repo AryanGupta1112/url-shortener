@@ -6,7 +6,9 @@ const urlSchema = new mongoose.Schema({
   shortUrl: { type: String, unique: true, default: shortid.generate },
   clicks: { type: Number, default: 0 },
   createdAt: { type: Date, default: Date.now },
-  expiresAt: { type: Date, default: null } // ✅ Expiration Date Field
+  expiresAt: { type: Date, default: null }, // ✅ Expiration Date Field
+  category: { type: String, default: "Uncategorized" }, // Now using AI-based categorization
+
 });
 
 // ✅ Automatically delete expired URLs
