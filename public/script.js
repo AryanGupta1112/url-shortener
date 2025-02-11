@@ -31,8 +31,6 @@ async function shortenUrl() {
             const shortCode = data.shortUrl;
             const shortUrl = `${API_BASE.replace("/api", "")}/${shortCode}`; // Fix double base URL
             document.getElementById("shortUrl").value = shortUrl;
-            document.getElementById("urlCategory").textContent = data.category; // Display category
-
             resultDiv.classList.remove("hidden");
 
             // Fetch analytics immediately
