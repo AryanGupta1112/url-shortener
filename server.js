@@ -18,7 +18,7 @@ if (!API_KEY) {
 // ✅ Allow Only Specific Frontend Domains
 const allowedOrigins = [
   "https://url-shortener-nine-phi.vercel.app",
-"https://url-shortener-xfee.onrender.com",
+"https://url-shortener-xfee.onrender.com"
 ];
 
 app.use(
