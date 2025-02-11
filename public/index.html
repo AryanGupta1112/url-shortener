@@ -10,7 +10,7 @@
     <div class="bg-gray-800 shadow-lg p-8 rounded-lg text-center w-full max-w-lg">
         <!-- Title Section -->
         <h1 class="text-3xl font-bold text-blue-400">🔗 AI-Powered URL Shortener</h1>
-        <p class="text-gray-300 mt-2">Shorten, track, and manage your links easily.</p>
+        <p class="text-gray-300 mt-2">Shorten, track, and manage your links easily with AI categorization.</p>
 
         <!-- Input Section -->
         <div class="mt-6">
@@ -26,9 +26,16 @@
 
         <!-- Shortened URL Display -->
         <div id="result" class="hidden mt-6 p-4 bg-green-900 rounded">
-            <p class="text-green-300 font-semibold">Your Shortened URL:</p>
+            <p class="text-green-300 font-semibold">✅ Your Shortened URL:</p>
             <input type="text" id="shortUrl" class="w-full p-2 mt-2 border rounded bg-gray-700 text-white" readonly>
             <button onclick="copyUrl()" class="bg-green-600 text-white p-2 mt-2 rounded hover:bg-green-700 transition-all w-full">📋 Copy</button>
+            <p id="copyMessage" class="text-green-300 text-sm mt-2 hidden">✅ Copied to clipboard!</p>
+        </div>
+
+        <!-- AI-Powered Category Display -->
+        <div id="categoryResult" class="hidden mt-6 p-4 bg-yellow-900 rounded">
+            <h2 class="font-semibold text-yellow-300">📂 AI-Powered Category</h2>
+            <p><strong>Category:</strong> <span id="urlCategory"></span></p>
         </div>
 
         <!-- Error Message -->
