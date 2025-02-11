@@ -28,8 +28,8 @@ async function shortenUrl() {
         const data = await response.json();
 
         if (data.shortUrl) {
-            const shortCode = data.shortUrl.replace(API_BASE + "/", "");
-            const shortUrl = `${API_BASE.replace("/api", "")}/${shortCode}`;
+            const shortCode = data.shortUrl;
+            const shortUrl = `${API_BASE.replace("/api", "")}/${shortCode}`; // Fix double base URL
             document.getElementById("shortUrl").value = shortUrl;
             resultDiv.classList.remove("hidden");
 
