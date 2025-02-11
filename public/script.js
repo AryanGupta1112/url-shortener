@@ -28,13 +28,16 @@ async function shortenUrl() {
         const data = await response.json();
 
         if (data.shortUrl) {
-            const shortCode = data.shortUrl;
+            const shortCode = data.shortUrl.split("/").pop(); // Extract only the code
             const shortUrl = `${API_BASE.replace("/api", "")}/${shortCode}`; // Fix double base URL
             document.getElementById("shortUrl").value = shortUrl;
             resultDiv.classList.remove("hidden");
 
+            // ✅ Display AI Category
+            document.getElementById("urlCategory").innerText = data.category || "Uncategorized";
+
             // Fetch analytics immediately
-            fetchAnalytics(data.shortUrl);
+            fetchAnalytics(shortCode);
         } else {
             throw new Error("Failed to shorten URL.");
         }
@@ -43,10 +46,8 @@ async function shortenUrl() {
     }
 }
 
-async function fetchAnalytics(shortUrl) {
+async function fetchAnalytics(shortCode) {
     try {
-        // Extract short code from full URL
-        const shortCode = shortUrl.split("/").pop();
         const response = await fetch(`${API_BASE}/analytics/${shortCode}`, {
             method: "GET",
             headers: { "Content-Type": "application/json" },
@@ -58,6 +59,9 @@ async function fetchAnalytics(shortUrl) {
             document.getElementById("originalUrl").innerText = data.originalUrl;
             document.getElementById("clickCount").innerText = data.clicks;
             document.getElementById("analyticsResult").classList.remove("hidden");
+
+            // ✅ Show Category in Analytics
+            document.getElementById("analyticsCategory").innerText = data.category || "Uncategorized";
         }
     } catch (error) {
         console.error("❌ Error fetching analytics:", error);
@@ -77,7 +81,7 @@ function showError(message) {
     errorMessage.classList.remove("hidden");
 }
 
-// ✅ Dark Mode Toggle
+// ✅ Dark Mode Toggle (Removed if default dark mode is enabled)
 function toggleDarkMode() {
     document.body.classList.toggle("dark");
 }

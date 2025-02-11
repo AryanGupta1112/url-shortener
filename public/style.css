@@ -85,9 +85,9 @@ button:hover {
 }
 
 /* Category Display */
-#urlCategory {
+#urlCategory, #analyticsCategory {
    font-weight: bold;
-   color: #ff9800;
+   color: #ffcc00; /* Yellow highlight */
 }
 
 /* Hidden Elements */
